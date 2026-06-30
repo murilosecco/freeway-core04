@@ -279,30 +279,53 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
 .mb-wrap{
   border-top:1px solid var(--border);
   background:linear-gradient(160deg,#111 0%,#1c1c1c 100%);
-  padding:48px 20px 56px;
+  padding:40px 16px 48px;
   display:flex;flex-direction:column;align-items:center;
 }
 .mb-device{
-  position:relative;width:100%;max-width:780px;cursor:pointer;
+  position:relative;
+  width:100%;max-width:760px;
+  cursor:pointer;
+  /* aspect-ratio do MacBook Air: 1206/991 = 1.217 */
+  aspect-ratio:1206/991;
 }
 .mb-device img.mb-frame{
-  width:100%;display:block;position:relative;z-index:2;pointer-events:none;
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:contain;
+  display:block;
+  z-index:2;
+  pointer-events:none;
 }
 .mb-screen{
   position:absolute;
-  top:4.75%;left:8.55%;
-  width:82.8%;height:82.8%;
-  overflow:hidden;z-index:1;border-radius:2px;background:#fff;
+  /* calibrado pixel a pixel sobre a imagem 1206x991 */
+  top:4.75%;
+  left:8.55%;
+  width:82.8%;
+  height:82.8%;
+  overflow:hidden;
+  z-index:1;
+  border-radius:1.5%;
+  background:#fff;
 }
-.mb-screen img{
+.mb-screen-inner{
   width:100%;height:100%;
-  object-fit:cover;object-position:top center;display:block;
-  transition:object-position 5s ease;
+  overflow-y:auto;
+  overflow-x:hidden;
+  /* esconde scrollbar mas permite scroll por JS */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
-.mb-device:hover .mb-screen img{object-position:bottom center;}
+.mb-screen-inner::-webkit-scrollbar{display:none}
+.mb-screen-inner img{
+  width:100%;
+  display:block;
+}
 .mb-hint{
-  margin-top:16px;font-size:9px;font-weight:700;letter-spacing:2px;
+  margin-top:14px;font-size:9px;font-weight:700;letter-spacing:2px;
   text-transform:uppercase;color:var(--muted);text-align:center;
+  padding:0 20px;
 }
 
 /* ─── FOOTER ─── */
@@ -532,13 +555,15 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   <p class="sec-sub">600×1920px — Template para E-drone</p>
 </div>
 <div class="mb-wrap">
-  <div class="mb-device" onclick="openLb(this)" data-group="email" data-idx="0">
+  <div class="mb-device" id="mb-device">
     <div class="mb-screen">
-      <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy">
+      <div class="mb-screen-inner" id="mb-inner">
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy" id="mb-email-img">
+      </div>
     </div>
     <img class="mb-frame" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/macbook.jpeg" alt="MacBook">
   </div>
-  <div class="mb-hint">Passe o mouse para rolar o e-mail · Toque para ampliar</div>
+  <div class="mb-hint">Toque para ampliar · Arraste pra baixo pra ver o e-mail completo</div>
 </div>
 
 <!-- FOOTER -->
@@ -594,6 +619,40 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNav(1);
   if (e.key === 'ArrowLeft')  lbNav(-1);
 });
+
+// ─── MACBOOK SCROLL ───
+const mbDevice = document.getElementById('mb-device');
+const mbInner  = document.getElementById('mb-inner');
+const mbImg    = document.getElementById('mb-email-img');
+
+if (mbDevice && mbInner) {
+  // Clique abre lightbox
+  mbDevice.addEventListener('click', () => {
+    curGroup = 'email';
+    curIdx   = 0;
+    showLb();
+  });
+
+  // Desktop: hover scroll automático
+  let scrollInterval = null;
+  mbDevice.addEventListener('mouseenter', () => {
+    if (scrollInterval) return;
+    scrollInterval = setInterval(() => {
+      const max = mbInner.scrollHeight - mbInner.clientHeight;
+      if (mbInner.scrollTop >= max) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+      } else {
+        mbInner.scrollTop += 2;
+      }
+    }, 16);
+  });
+  mbDevice.addEventListener('mouseleave', () => {
+    if (scrollInterval) { clearInterval(scrollInterval); scrollInterval = null; }
+    // Reset suave de volta ao topo
+    mbInner.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 // ─── CARROSSEL DOTS ───
 const carr = document.getElementById('carr');
