@@ -275,58 +275,19 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   background:var(--orange);color:#0D0D0D;padding:2px 6px;z-index:2;
 }
 
-/* ─── MACBOOK MOCK ─── */
-.mb-wrap{
+/* ─── EMAIL MOCK ─── */
+.email-wrap{
   border-top:1px solid var(--border);
-  background:linear-gradient(160deg,#111 0%,#1c1c1c 100%);
-  padding:40px 16px 48px;
-  display:flex;flex-direction:column;align-items:center;
+  background:#EDEAE4;
+  padding:40px 20px;
+  display:flex;justify-content:center;
 }
-.mb-device{
-  position:relative;
-  width:100%;max-width:760px;
-  cursor:pointer;
-  /* aspect-ratio do MacBook Air: 1206/991 = 1.217 */
-  aspect-ratio:1206/991;
+.email-wrap .img-click{
+  width:100%;max-width:520px;
+  box-shadow:0 12px 56px rgba(0,0,0,0.25);
+  border:none;cursor:pointer;
 }
-.mb-device img.mb-frame{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:contain;
-  display:block;
-  z-index:2;
-  pointer-events:none;
-}
-.mb-screen{
-  position:absolute;
-  /* calibrado pixel a pixel sobre a imagem 1206x991 */
-  top:4.75%;
-  left:8.55%;
-  width:82.8%;
-  height:82.8%;
-  overflow:hidden;
-  z-index:1;
-  border-radius:1.5%;
-  background:#fff;
-}
-.mb-screen-inner{
-  width:100%;height:100%;
-  overflow-y:auto;
-  overflow-x:hidden;
-  /* esconde scrollbar mas permite scroll por JS */
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-}
-.mb-screen-inner::-webkit-scrollbar{display:none}
-.mb-screen-inner img{
-  width:100%;
-  display:block;
-}
-.mb-hint{
-  margin-top:14px;font-size:9px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--muted);text-align:center;
-  padding:0 20px;
-}
+.email-wrap .img-click img{width:100%;display:block}
 
 /* ─── FOOTER ─── */
 .ft{
@@ -359,7 +320,7 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   .mobile-grid{grid-template-columns:repeat(3,1fr)}
   .meta-grid{grid-template-columns:repeat(3,1fr)}
   .feed-stories{grid-template-columns:1fr 1fr}
-  .mb-wrap{padding:56px 40px 64px}
+  .email-wrap{padding:40px}
   .ft{padding:72px 40px 56px}
 }
 @media(min-width:960px){
@@ -370,7 +331,7 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   .pb{padding:18px 56px}
   .carr-wrap{padding:32px 0 32px 56px}
   .carr-item{flex:0 0 320px;max-width:320px}
-  .mb-device{max-width:900px}
+  .email-wrap .img-click{max-width:600px}
   .ft{padding:80px 56px 64px}
 }
 </style>
@@ -554,16 +515,10 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   <h2 class="sec-title">E-MAIL <span class="out">MARKETING</span></h2>
   <p class="sec-sub">600×1920px — Template para E-drone</p>
 </div>
-<div class="mb-wrap">
-  <div class="mb-device" id="mb-device">
-    <div class="mb-screen">
-      <div class="mb-screen-inner" id="mb-inner">
-        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy" id="mb-email-img">
-      </div>
-    </div>
-    <img class="mb-frame" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/macbook.jpeg" alt="MacBook">
+<div class="email-wrap">
+  <div class="img-click" onclick="openLb(this)" data-group="email" data-idx="0">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy">
   </div>
-  <div class="mb-hint">Toque para ampliar · Arraste pra baixo pra ver o e-mail completo</div>
 </div>
 
 <!-- FOOTER -->
@@ -619,40 +574,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbNav(1);
   if (e.key === 'ArrowLeft')  lbNav(-1);
 });
-
-// ─── MACBOOK SCROLL ───
-const mbDevice = document.getElementById('mb-device');
-const mbInner  = document.getElementById('mb-inner');
-const mbImg    = document.getElementById('mb-email-img');
-
-if (mbDevice && mbInner) {
-  // Clique abre lightbox
-  mbDevice.addEventListener('click', () => {
-    curGroup = 'email';
-    curIdx   = 0;
-    showLb();
-  });
-
-  // Desktop: hover scroll automático
-  let scrollInterval = null;
-  mbDevice.addEventListener('mouseenter', () => {
-    if (scrollInterval) return;
-    scrollInterval = setInterval(() => {
-      const max = mbInner.scrollHeight - mbInner.clientHeight;
-      if (mbInner.scrollTop >= max) {
-        clearInterval(scrollInterval);
-        scrollInterval = null;
-      } else {
-        mbInner.scrollTop += 2;
-      }
-    }, 16);
-  });
-  mbDevice.addEventListener('mouseleave', () => {
-    if (scrollInterval) { clearInterval(scrollInterval); scrollInterval = null; }
-    // Reset suave de volta ao topo
-    mbInner.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
 
 // ─── CARROSSEL DOTS ───
 const carr = document.getElementById('carr');
