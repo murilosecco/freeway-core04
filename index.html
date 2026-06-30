@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Freeway Core04 — Campanha Completa</title>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:root{--black:#0D0D0D;--off:#F0ECE4;--orange:#E84E0F;--muted:rgba(240,236,228,0.4);--border:rgba(240,236,228,0.08)}
+
+/* HEADER */
+.hd{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.hd svg{width:100px;height:auto}
+.hd-right{display:flex;align-items:center;gap:20px}
+.hd-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
+.hd-count{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted)}
+
+/* HERO */
+.hero{position:relative;width:100%;min-height:100svh;overflow:hidden;background:#0D0D0D;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.45);display:block}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,#0D0D0D 0%,rgba(13,13,13,0.3) 50%,transparent 100%)}
+.hero-body{position:relative;z-index:2;padding:0 28px 64px;max-width:700px}
+.hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--orange);flex-shrink:0}
+.hero-h1{font-size:clamp(52px,14vw,120px);font-weight:900;line-height:0.88;letter-spacing:-2px;text-transform:uppercase;margin-bottom:20px}
+.t-out{-webkit-text-stroke:2px #F0ECE4;color:transparent}
+.t-or{color:var(--orange)}
+.hero-sub{font-size:15px;font-weight:400;line-height:1.6;color:var(--muted)}
+.hero-stats{position:absolute;bottom:64px;right:28px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.stat{text-align:right}
+.stat-n{font-size:clamp(32px,6vw,52px);font-weight:900;color:#F0ECE4;line-height:1;letter-spacing:-1px}
+.stat-l{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+
+/* SECTION HEADERS */
+.sec{padding:64px 28px 32px;border-top:1px solid var(--border)}
+.sec-label{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.sec-title{font-size:clamp(28px,7vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-1.5px;line-height:0.95}
+.sec-title .out{-webkit-text-stroke:1.5px #F0ECE4;color:transparent}
+.sec-sub{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* PHASE BAR */
+.pb{width:100%;background:var(--orange);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.pb-t{font-size:clamp(13px,3.5vw,18px);font-weight:900;text-transform:uppercase;color:#0D0D0D;letter-spacing:-0.2px}
+.pb-s{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(13,13,13,0.5)}
+
+/* FRAMES — moldura de apresentação */
+.frame{background:#0D0D0D;border-bottom:1px solid var(--border)}
+.frame-inner{padding:32px 28px}
+.frame-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.frame-format{font-size:11px;color:var(--muted);margin-bottom:20px}
+.frame-img{width:100%;display:block;border:1px solid rgba(255,255,255,0.06)}
+.frame-img-contained{max-height:600px;object-fit:contain;object-position:center}
+.frame-caption{margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6}
+
+/* BANNER DESKTOP — ocupa largura toda */
+.banner-desktop-wrap{width:100%;overflow:hidden;background:#000;border-bottom:1px solid var(--border)}
+.banner-desktop-wrap img{width:100%;display:block;max-height:480px;object-fit:cover;object-position:center}
+
+/* GRID LAYOUTS */
+.grid-3{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border)}
+.grid-2{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border)}
+
+/* CARROSSEL STRIP */
+.carrossel-strip{display:flex;gap:2px;overflow-x:auto;padding:0;background:#0D0D0D;scrollbar-width:thin;scrollbar-color:var(--orange) transparent}
+.carrossel-strip::-webkit-scrollbar{height:3px}
+.carrossel-strip::-webkit-scrollbar-track{background:transparent}
+.carrossel-strip::-webkit-scrollbar-thumb{background:var(--orange)}
+.carrossel-item{flex:0 0 260px;position:relative}
+.carrossel-item img{width:260px;height:346px;object-fit:cover;display:block}
+.carrossel-item-num{position:absolute;top:12px;left:12px;font-size:9px;font-weight:700;letter-spacing:2px;color:#fff;background:var(--orange);padding:3px 7px}
+
+/* EMAIL MOCK */
+.email-mock{background:#f5f5f5;padding:32px 0;display:flex;justify-content:center}
+.email-mock img{max-width:500px;width:100%;display:block;box-shadow:0 8px 48px rgba(0,0,0,0.3)}
+
+/* MOBILE GRID */
+.mobile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#111}
+.mobile-grid img{width:100%;aspect-ratio:960/1400;object-fit:cover;display:block}
+
+/* META GRID */
+.meta-grid{display:grid;grid-template-columns:1fr;gap:2px;background:#111}
+.meta-item{position:relative;overflow:hidden}
+.meta-item img{width:100%;display:block}
+.meta-badge{position:absolute;top:14px;right:14px;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--orange);color:#0D0D0D;padding:4px 8px}
+
+/* STORIES GRID */
+.stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111}
+.stories-grid img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
+
+/* FOOTER */
+.ft{background:#0D0D0D;border-top:1px solid var(--border);padding:60px 28px 48px}
+.ft svg{width:90px;margin-bottom:16px;display:block}
+.ft-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+.ft-sub{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:48px}
+.ft-mote{font-size:clamp(36px,11vw,80px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:0.88;-webkit-text-stroke:1.5px rgba(232,78,15,0.2);color:transparent}
+.ft-mote span{-webkit-text-stroke:1.5px var(--orange)}
+.ft-copy{margin-top:24px;font-size:10px;color:rgba(240,236,228,0.18);letter-spacing:1px}
+
+/* DESKTOP */
+@media(min-width:768px){
+  .hd{padding:18px 48px}
+  .hd svg{width:120px}
+  .hero-body{padding:0 48px 88px}
+  .hero-stats{right:48px;bottom:88px}
+  .sec{padding:80px 48px 40px}
+  .pb{padding:18px 48px}
+  .frame-inner{padding:40px 48px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .carrossel-item{flex:0 0 320px}
+  .carrossel-item img{width:320px;height:427px}
+  .mobile-grid{grid-template-columns:repeat(3,1fr)}
+  .meta-grid{grid-template-columns:repeat(3,1fr)}
+  .email-mock img{max-width:600px}
+  .ft{padding:80px 48px 56px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hd">
+  <div><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
+  <div class="hd-right">
+    <span class="hd-count">16 PEÇAS</span>
+    <span class="hd-tag">Core04 · Campanha</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-bg" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="">
+  <div class="hero-grad"></div>
+  <div class="hero-body">
+    <div class="hero-eyebrow">Freeway Core04 — Couro Taupe</div>
+    <h1 class="hero-h1">
+      CLÁSSICO<br>
+      <span class="t-out">NÃO</span><br>
+      <span class="t-or">ENVELHECE.</span>
+    </h1>
+    <p class="hero-sub">Moc-toe costurado à mão · Sola em crepe natural · Couro nobuck<br>Estilo que não data.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">16</div><div class="stat-l">Peças produzidas</div></div>
+    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Formatos</div></div>
+  </div>
+</section>
+
+<!-- BANNERS -->
+<div class="sec">
+  <div class="sec-label">01 — Banners de Site</div>
+  <h2 class="sec-title">BANNER <span class="out">DESKTOP</span></h2>
+  <p class="sec-sub">1920×900px — Banner principal do site</p>
+</div>
+<div class="banner-desktop-wrap">
+  <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="Banner Desktop">
+</div>
+
+<div class="sec">
+  <div class="sec-label">02 — Banners Mobile</div>
+  <h2 class="sec-title">3 <span class="out">VERSÕES</span></h2>
+  <p class="sec-sub">960×1400px — Três variações para teste A/B</p>
+</div>
+<div class="mobile-grid" style="border-top:1px solid var(--border)">
+  <div style="position:relative">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v1.png" alt="Mobile v1" style="width:100%;display:block">
+    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V1</div>
+  </div>
+  <div style="position:relative">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v2.png" alt="Mobile v2" style="width:100%;display:block">
+    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V2</div>
+  </div>
+  <div style="position:relative">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v3.png" alt="Mobile v3" style="width:100%;display:block">
+    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V3</div>
+  </div>
+</div>
+
+<!-- CARROSSEL -->
+<div class="sec">
+  <div class="sec-label">03 — Carrossel</div>
+  <h2 class="sec-title">5 <span class="out">SLIDES</span></h2>
+  <p class="sec-sub">1080×1350px — Arraste para ver todos os slides</p>
+</div>
+<div style="border-top:1px solid var(--border);padding:28px;background:#0D0D0D">
+  <div class="carrossel-strip">
+    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_01.png" alt="Slide 1"><div class="carrossel-item-num">01</div></div>
+    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_02.png" alt="Slide 2"><div class="carrossel-item-num">02</div></div>
+    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_03.png" alt="Slide 3"><div class="carrossel-item-num">03</div></div>
+    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_04.png" alt="Slide 4"><div class="carrossel-item-num">04</div></div>
+    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_05.png" alt="Slide 5"><div class="carrossel-item-num">05</div></div>
+  </div>
+</div>
+
+<!-- FEED -->
+<div class="sec">
+  <div class="sec-label">04 — Feed & Stories</div>
+  <h2 class="sec-title">POST <span class="out">ÚNICO</span></h2>
+  <p class="sec-sub">1080×1350px — Post de feed</p>
+</div>
+<div class="grid-2" style="border-top:1px solid var(--border)">
+  <div class="frame">
+    <div class="frame-inner" style="padding-bottom:0">
+      <div class="frame-label">Feed</div>
+      <div class="frame-format">1080×1350px</div>
+    </div>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/feed.png" alt="Feed" class="frame-img">
+  </div>
+  <div>
+    <div class="sec" style="padding-bottom:24px;border-top:none">
+      <div class="sec-label">Stories</div>
+      <h2 class="sec-title">2 <span class="out">VERSÕES</span></h2>
+      <p class="sec-sub">1080×1920px</p>
+    </div>
+    <div class="stories-grid" style="border-top:1px solid var(--border)">
+      <div style="position:relative">
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png" alt="Stories" style="width:100%;display:block">
+        <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">Original</div>
+      </div>
+      <div style="position:relative">
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png" alt="Stories Adaptado" style="width:100%;display:block">
+        <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">Adaptado</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- META ADS -->
+<div class="sec">
+  <div class="sec-label">05 — Meta Ads</div>
+  <h2 class="sec-title">3 <span class="out">ANÚNCIOS</span></h2>
+  <p class="sec-sub">Objetivo: Tráfego · Imagem única · Variações A/B/C</p>
+</div>
+<div class="meta-grid" style="border-top:1px solid var(--border)">
+  <div class="meta-item">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_1.png" alt="Meta 1">
+    <div class="meta-badge">Anúncio A</div>
+  </div>
+  <div class="meta-item">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_2.png" alt="Meta 2">
+    <div class="meta-badge">Anúncio B</div>
+  </div>
+  <div class="meta-item">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_3.png" alt="Meta 3">
+    <div class="meta-badge">Anúncio C</div>
+  </div>
+</div>
+
+<!-- EMAIL -->
+<div class="sec">
+  <div class="sec-label">06 — E-mail Marketing</div>
+  <h2 class="sec-title">EMAIL <span class="out">MKT</span></h2>
+  <p class="sec-sub">600×1920px — Template completo para CRM</p>
+</div>
+<div class="email-mock" style="border-top:1px solid var(--border)">
+  <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing">
+</div>
+
+<!-- FOOTER -->
+<footer class="ft">
+  <div><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
+  <div class="ft-tag">Campanha Core04 · Couro Taupe</div>
+  <div class="ft-sub">Freeway Boots & Shoes · lojafreeway.com.br<br>16 peças · 6 formatos · 1 mote</div>
+  <div class="ft-mote">CLÁSSICO<br>NÃO<br><span>ENVELHECE.</span></div>
+  <div class="ft-copy">© Freeway Calçados · Desde 1989</div>
+</footer>
+
+</body>
+</html>
