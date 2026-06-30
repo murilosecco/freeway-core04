@@ -115,10 +115,28 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   padding:20px;
 }
 .lb-overlay.active{display:flex}
+.lb-track{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+  max-height:90svh;
+}
+.lb-slide{
+  min-width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
 .lb-overlay img{
   max-width:100%;max-height:90svh;
   object-fit:contain;display:block;
   border:1px solid var(--border);
+  user-select:none;
+  -webkit-user-drag:none;
 }
 .lb-close{
   position:fixed;top:16px;right:20px;
@@ -336,7 +354,11 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
 <div class="lb-overlay" id="lb" onclick="if(event.target===this)closeLb()">
   <span class="lb-counter" id="lb-counter"></span>
   <button class="lb-close" onclick="closeLb()">✕</button>
-  <img id="lb-img" src="" alt="">
+  <div class="lb-track" id="lb-track">
+    <div class="lb-slide" id="lb-slide-prev"><img id="lb-img-prev" src="" alt=""></div>
+    <div class="lb-slide" id="lb-slide-curr"><img id="lb-img" src="" alt=""></div>
+    <div class="lb-slide" id="lb-slide-next"><img id="lb-img-next" src="" alt=""></div>
+  </div>
   <div class="lb-nav">
     <button onclick="lbNav(-1)">← Anterior</button>
     <button onclick="lbNav(1)">Próxima →</button>
@@ -536,17 +558,37 @@ const groups = {
 };
 
 let curGroup = '', curIdx = 0;
+let lbAnimating = false;
 
 function openLb(el) {
   curGroup = el.dataset.group;
   curIdx   = parseInt(el.dataset.idx);
-  showLb();
+  showLb(null);
 }
 
-function showLb() {
+function showLb(dir) {
   const imgs = groups[curGroup];
-  document.getElementById('lb-img').src = imgs[curIdx];
+  const prev = (curIdx - 1 + imgs.length) % imgs.length;
+  const next = (curIdx + 1) % imgs.length;
+
+  const track    = document.getElementById('lb-track');
+  const slidePrev = document.getElementById('lb-slide-prev');
+  const slideCurr = document.getElementById('lb-slide-curr');
+  const slideNext = document.getElementById('lb-slide-next');
+  const imgPrev  = document.getElementById('lb-img-prev');
+  const imgCurr  = document.getElementById('lb-img');
+  const imgNext  = document.getElementById('lb-img-next');
+
+  imgPrev.src = imgs[prev];
+  imgCurr.src = imgs[curIdx];
+  imgNext.src = imgs[next];
+
   document.getElementById('lb-counter').textContent = (curIdx+1) + ' / ' + imgs.length;
+
+  // Posicionar sem animação: prev | curr | next
+  track.style.transition = 'none';
+  track.style.transform = 'translateX(-100%)';
+
   document.getElementById('lb').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -557,10 +599,33 @@ function closeLb() {
 }
 
 function lbNav(dir) {
+  if (lbAnimating) return;
   const imgs = groups[curGroup];
-  curIdx = (curIdx + dir + imgs.length) % imgs.length;
-  showLb();
+  const track = document.getElementById('lb-track');
+
+  lbAnimating = true;
+  track.style.transition = 'transform 0.35s cubic-bezier(0.4,0,0.2,1)';
+  // dir=1 → próxima (slide para esquerda), dir=-1 → anterior (slide para direita)
+  track.style.transform = dir === 1 ? 'translateX(-200%)' : 'translateX(0%)';
+
+  track.addEventListener('transitionend', function onEnd() {
+    track.removeEventListener('transitionend', onEnd);
+    curIdx = (curIdx + dir + imgs.length) % imgs.length;
+    showLb(dir);
+    lbAnimating = false;
+  }, { once: true });
 }
+
+// Touch/swipe no lightbox
+(function() {
+  let startX = 0;
+  const lb = document.getElementById('lb');
+  lb.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
+  }, { passive: true });
+})();
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLb();
