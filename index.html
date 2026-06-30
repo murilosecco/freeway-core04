@@ -236,27 +236,21 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
 /* ─── FEED + STORIES ─── */
 .feed-stories{
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:2px;
   background:#111;
   border-top:1px solid var(--border);
 }
 .feed-stories .img-click{border:none}
+.feed-stories .img-click img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
 .fs-label{
-  padding:16px 20px 12px;
-  font-size:9px;font-weight:700;letter-spacing:3px;
+  padding:10px 12px 8px;
+  font-size:8px;font-weight:700;letter-spacing:2px;
   text-transform:uppercase;color:var(--orange);
   background:#0D0D0D;
 }
-
-/* ─── STORIES GRID ─── */
-.stories-row{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:2px;background:#111;
-}
-.stories-row .img-click{border:none}
 .st-badge{
-  position:absolute;top:10px;left:10px;
+  position:absolute;top:8px;left:8px;
   font-size:7px;font-weight:800;letter-spacing:1px;
   background:var(--orange);color:#0D0D0D;padding:2px 6px;z-index:2;
 }
@@ -319,7 +313,7 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   .carr-item{flex:0 0 280px;max-width:280px}
   .mobile-grid{grid-template-columns:repeat(3,1fr)}
   .meta-grid{grid-template-columns:repeat(3,1fr)}
-  .feed-stories{grid-template-columns:1fr 1fr}
+  /* feed-stories já em 3 colunas */
   .email-wrap{padding:40px}
   .ft{padding:72px 40px 56px}
 }
@@ -467,23 +461,22 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   <p class="sec-sub">Post único + Stories em 2 versões</p>
 </div>
 <div class="feed-stories">
-  <div>
+  <div style="position:relative">
     <div class="fs-label">Feed · 1080×1350</div>
     <div class="img-click" onclick="openLb(this)" data-group="feed" data-idx="0">
       <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/feed.png" alt="Feed" loading="lazy">
     </div>
   </div>
-  <div>
-    <div class="fs-label">Stories · 1080×1920</div>
-    <div class="stories-row">
-      <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="0" style="position:relative">
-        <span class="st-badge">Orig.</span>
-        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png" alt="Stories" loading="lazy" style="width:100%;display:block">
-      </div>
-      <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="1" style="position:relative">
-        <span class="st-badge">Adapt.</span>
-        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png" alt="Stories Adaptado" loading="lazy" style="width:100%;display:block">
-      </div>
+  <div style="position:relative">
+    <div class="fs-label">Stories Original</div>
+    <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="0">
+      <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png" alt="Stories" loading="lazy">
+    </div>
+  </div>
+  <div style="position:relative">
+    <div class="fs-label">Stories Adaptado</div>
+    <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="1">
+      <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png" alt="Stories Adaptado" loading="lazy">
     </div>
   </div>
 </div>
