@@ -275,19 +275,35 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   background:var(--orange);color:#0D0D0D;padding:2px 6px;z-index:2;
 }
 
-/* ─── EMAIL MOCK ─── */
-.email-wrap{
+/* ─── MACBOOK MOCK ─── */
+.mb-wrap{
   border-top:1px solid var(--border);
-  background:#E8E4DC;
-  padding:32px 20px;
-  display:flex;justify-content:center;
+  background:linear-gradient(160deg,#111 0%,#1c1c1c 100%);
+  padding:48px 20px 56px;
+  display:flex;flex-direction:column;align-items:center;
 }
-.email-wrap .img-click{
-  max-width:460px;width:100%;
-  box-shadow:0 8px 48px rgba(0,0,0,0.4);
-  border:none;
+.mb-device{
+  position:relative;width:100%;max-width:780px;cursor:pointer;
 }
-.email-wrap .img-click img{width:100%;display:block}
+.mb-device img.mb-frame{
+  width:100%;display:block;position:relative;z-index:2;pointer-events:none;
+}
+.mb-screen{
+  position:absolute;
+  top:4.75%;left:8.55%;
+  width:82.8%;height:82.8%;
+  overflow:hidden;z-index:1;border-radius:2px;background:#fff;
+}
+.mb-screen img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;display:block;
+  transition:object-position 5s ease;
+}
+.mb-device:hover .mb-screen img{object-position:bottom center;}
+.mb-hint{
+  margin-top:16px;font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);text-align:center;
+}
 
 /* ─── FOOTER ─── */
 .ft{
@@ -320,7 +336,7 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   .mobile-grid{grid-template-columns:repeat(3,1fr)}
   .meta-grid{grid-template-columns:repeat(3,1fr)}
   .feed-stories{grid-template-columns:1fr 1fr}
-  .email-wrap{padding:40px}
+  .mb-wrap{padding:56px 40px 64px}
   .ft{padding:72px 40px 56px}
 }
 @media(min-width:960px){
@@ -331,7 +347,7 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   .pb{padding:18px 56px}
   .carr-wrap{padding:32px 0 32px 56px}
   .carr-item{flex:0 0 320px;max-width:320px}
-  .email-wrap .img-click{max-width:600px}
+  .mb-device{max-width:900px}
   .ft{padding:80px 56px 64px}
 }
 </style>
@@ -515,10 +531,14 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
   <h2 class="sec-title">E-MAIL <span class="out">MARKETING</span></h2>
   <p class="sec-sub">600×1920px — Template para E-drone</p>
 </div>
-<div class="email-wrap">
-  <div class="img-click" onclick="openLb(this)" data-group="email" data-idx="0">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy">
+<div class="mb-wrap">
+  <div class="mb-device" onclick="openLb(this)" data-group="email" data-idx="0">
+    <div class="mb-screen">
+      <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy">
+    </div>
+    <img class="mb-frame" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/macbook.jpeg" alt="MacBook">
   </div>
+  <div class="mb-hint">Passe o mouse para rolar o e-mail · Toque para ampliar</div>
 </div>
 
 <!-- FOOTER -->
