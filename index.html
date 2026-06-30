@@ -7,221 +7,482 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-:root{--black:#0D0D0D;--off:#F0ECE4;--orange:#E84E0F;--muted:rgba(240,236,228,0.4);--border:rgba(240,236,228,0.08)}
+html{scroll-behavior:smooth}
+html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%}
+:root{
+  --black:#0D0D0D;
+  --off:#F0ECE4;
+  --orange:#E84E0F;
+  --muted:rgba(240,236,228,0.45);
+  --border:rgba(240,236,228,0.08);
+}
 
-/* HEADER */
-.hd{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(13,13,13,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.hd svg{width:100px;height:auto}
-.hd-right{display:flex;align-items:center;gap:20px}
-.hd-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
-.hd-count{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted)}
+/* ─── HEADER ─── */
+.hd{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:rgba(13,13,13,0.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.hd-logo svg{width:88px;height:auto;display:block}
+.hd-right{display:flex;align-items:center;gap:12px}
+.hd-tag{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange)}
+.hd-pill{font-size:8px;font-weight:700;letter-spacing:1px;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:3px 8px;border-radius:20px}
 
-/* HERO */
-.hero{position:relative;width:100%;min-height:100svh;overflow:hidden;background:#0D0D0D;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.45);display:block}
-.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,#0D0D0D 0%,rgba(13,13,13,0.3) 50%,transparent 100%)}
-.hero-body{position:relative;z-index:2;padding:0 28px 64px;max-width:700px}
-.hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--orange);flex-shrink:0}
-.hero-h1{font-size:clamp(52px,14vw,120px);font-weight:900;line-height:0.88;letter-spacing:-2px;text-transform:uppercase;margin-bottom:20px}
-.t-out{-webkit-text-stroke:2px #F0ECE4;color:transparent}
-.t-or{color:var(--orange)}
-.hero-sub{font-size:15px;font-weight:400;line-height:1.6;color:var(--muted)}
-.hero-stats{position:absolute;bottom:64px;right:28px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.stat{text-align:right}
-.stat-n{font-size:clamp(32px,6vw,52px);font-weight:900;color:#F0ECE4;line-height:1;letter-spacing:-1px}
-.stat-l{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+/* ─── HERO ─── */
+.hero{
+  position:relative;width:100%;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;background:#0D0D0D;
+}
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:55% 30%;
+  opacity:0.72;display:block;
+}
+.hero-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(13,13,13,1) 0%,
+    rgba(13,13,13,0.75) 35%,
+    rgba(13,13,13,0.2) 65%,
+    rgba(13,13,13,0.05) 100%
+  );
+}
+.hero-body{
+  position:relative;z-index:2;
+  padding:0 20px 48px;
+}
+.hero-ey{
+  font-size:9px;font-weight:700;letter-spacing:4px;
+  text-transform:uppercase;color:var(--orange);
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-ey::before{content:'';width:20px;height:2px;background:var(--orange);flex-shrink:0}
+.hero-h1{
+  font-size:clamp(54px,16vw,110px);
+  font-weight:900;line-height:0.88;
+  letter-spacing:-2px;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero-h1 .out{-webkit-text-stroke:2px var(--off);color:transparent}
+.hero-h1 .or{color:var(--orange)}
+.hero-desc{
+  font-size:13px;font-weight:400;line-height:1.65;
+  color:var(--muted);max-width:320px;
+  margin-bottom:28px;
+}
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{
+  font-size:8px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;
+  border:1px solid rgba(232,78,15,0.4);
+  color:var(--orange);
+  padding:5px 12px;
+}
 
-/* SECTION HEADERS */
-.sec{padding:64px 28px 32px;border-top:1px solid var(--border)}
-.sec-label{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
-.sec-title{font-size:clamp(28px,7vw,52px);font-weight:900;text-transform:uppercase;letter-spacing:-1.5px;line-height:0.95}
-.sec-title .out{-webkit-text-stroke:1.5px #F0ECE4;color:transparent}
-.sec-sub{font-size:13px;color:var(--muted);margin-top:8px}
+/* ─── SECTION ─── */
+.sec{padding:52px 20px 28px;border-top:1px solid var(--border)}
+.sec-label{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.sec-title{
+  font-size:clamp(26px,8vw,48px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-1.5px;line-height:0.95;
+}
+.sec-title .out{-webkit-text-stroke:1.5px var(--off);color:transparent}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
 
-/* PHASE BAR */
-.pb{width:100%;background:var(--orange);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
-.pb-t{font-size:clamp(13px,3.5vw,18px);font-weight:900;text-transform:uppercase;color:#0D0D0D;letter-spacing:-0.2px}
-.pb-s{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(13,13,13,0.5)}
+/* ─── PHASE BAR ─── */
+.pb{
+  width:100%;background:var(--orange);
+  padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.pb-t{font-size:clamp(12px,3.5vw,17px);font-weight:900;text-transform:uppercase;color:#0D0D0D;letter-spacing:-0.2px}
+.pb-s{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(13,13,13,0.5);flex-shrink:0}
 
-/* FRAMES — moldura de apresentação */
-.frame{background:#0D0D0D;border-bottom:1px solid var(--border)}
-.frame-inner{padding:32px 28px}
-.frame-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
-.frame-format{font-size:11px;color:var(--muted);margin-bottom:20px}
-.frame-img{width:100%;display:block;border:1px solid rgba(255,255,255,0.06)}
-.frame-img-contained{max-height:600px;object-fit:contain;object-position:center}
-.frame-caption{margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6}
+/* ─── LIGHTBOX ─── */
+.lb-overlay{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.95);
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.lb-overlay.active{display:flex}
+.lb-overlay img{
+  max-width:100%;max-height:90svh;
+  object-fit:contain;display:block;
+  border:1px solid var(--border);
+}
+.lb-close{
+  position:fixed;top:16px;right:20px;
+  font-size:28px;color:#fff;cursor:pointer;
+  background:none;border:none;line-height:1;
+  z-index:1001;padding:8px;
+}
+.lb-nav{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  display:flex;gap:12px;z-index:1001;
+}
+.lb-nav button{
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-family:'League Spartan',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  padding:8px 20px;cursor:pointer;
+}
+.lb-counter{
+  position:fixed;top:20px;left:20px;
+  font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);
+  z-index:1001;
+}
 
-/* BANNER DESKTOP — ocupa largura toda */
-.banner-desktop-wrap{width:100%;overflow:hidden;background:#000;border-bottom:1px solid var(--border)}
-.banner-desktop-wrap img{width:100%;display:block;max-height:480px;object-fit:cover;object-position:center}
+/* ─── CLICKABLE IMAGE ─── */
+.img-click{
+  cursor:pointer;display:block;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.05);
+  transition:transform 0.25s ease;
+}
+.img-click img{width:100%;display:block;transition:transform 0.4s ease}
+.img-click::after{
+  content:'⤢';
+  position:absolute;bottom:10px;right:12px;
+  font-size:14px;color:rgba(255,255,255,0.5);
+  background:rgba(0,0,0,0.4);
+  padding:4px 7px;
+  opacity:0;transition:opacity 0.2s;
+  pointer-events:none;
+}
+.img-click:hover::after{opacity:1}
+.img-click:hover img{transform:scale(1.02)}
+.img-click:active{transform:scale(0.99)}
 
-/* GRID LAYOUTS */
-.grid-3{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border)}
-.grid-2{display:grid;grid-template-columns:1fr;gap:1px;background:var(--border)}
+/* ─── BANNER DESKTOP ─── */
+.banner-desk{
+  width:100%;overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.banner-desk .img-click img{
+  width:100%;
+  max-height:420px;
+  object-fit:cover;object-position:center;
+}
 
-/* CARROSSEL STRIP */
-.carrossel-strip{display:flex;gap:2px;overflow-x:auto;padding:0;background:#0D0D0D;scrollbar-width:thin;scrollbar-color:var(--orange) transparent}
-.carrossel-strip::-webkit-scrollbar{height:3px}
-.carrossel-strip::-webkit-scrollbar-track{background:transparent}
-.carrossel-strip::-webkit-scrollbar-thumb{background:var(--orange)}
-.carrossel-item{flex:0 0 260px;position:relative}
-.carrossel-item img{width:260px;height:346px;object-fit:cover;display:block}
-.carrossel-item-num{position:absolute;top:12px;left:12px;font-size:9px;font-weight:700;letter-spacing:2px;color:#fff;background:var(--orange);padding:3px 7px}
+/* ─── BANNER MOBILE GRID ─── */
+.mobile-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:#111;
+  border-top:1px solid var(--border);
+}
+.mobile-grid .img-click{border:none}
+.mobile-grid .ver-badge{
+  position:absolute;top:8px;left:8px;
+  font-size:7px;font-weight:800;letter-spacing:1px;
+  background:var(--orange);color:#0D0D0D;
+  padding:2px 6px;z-index:2;
+}
 
-/* EMAIL MOCK */
-.email-mock{background:#f5f5f5;padding:32px 0;display:flex;justify-content:center}
-.email-mock img{max-width:500px;width:100%;display:block;box-shadow:0 8px 48px rgba(0,0,0,0.3)}
+/* ─── CARROSSEL ─── */
+.carr-wrap{
+  padding:20px 0 20px 20px;
+  border-top:1px solid var(--border);
+  background:#0D0D0D;
+  overflow:hidden;
+}
+.carr-hint{
+  font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;padding-right:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.carr-hint::after{content:'→';color:var(--orange)}
+.carr-strip{
+  display:flex;gap:10px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:8px;
+  padding-right:20px;
+}
+.carr-strip::-webkit-scrollbar{display:none}
+.carr-item{
+  flex:0 0 72vw;max-width:280px;
+  scroll-snap-align:start;
+  position:relative;
+}
+.carr-item .img-click{border:none}
+.carr-item img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.carr-num{
+  position:absolute;top:10px;right:10px;
+  font-size:8px;font-weight:800;letter-spacing:2px;
+  background:var(--orange);color:#0D0D0D;padding:3px 7px;
+  z-index:2;
+}
+.carr-dots{
+  display:flex;gap:6px;padding-top:14px;padding-right:20px;
+}
+.carr-dot{width:20px;height:2px;background:rgba(255,255,255,0.15)}
+.carr-dot.active{background:var(--orange)}
 
-/* MOBILE GRID */
-.mobile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#111}
-.mobile-grid img{width:100%;aspect-ratio:960/1400;object-fit:cover;display:block}
+/* ─── FEED + STORIES ─── */
+.feed-stories{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2px;
+  background:#111;
+  border-top:1px solid var(--border);
+}
+.feed-stories .img-click{border:none}
+.fs-label{
+  padding:16px 20px 12px;
+  font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--orange);
+  background:#0D0D0D;
+}
 
-/* META GRID */
-.meta-grid{display:grid;grid-template-columns:1fr;gap:2px;background:#111}
-.meta-item{position:relative;overflow:hidden}
-.meta-item img{width:100%;display:block}
-.meta-badge{position:absolute;top:14px;right:14px;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:var(--orange);color:#0D0D0D;padding:4px 8px}
+/* ─── STORIES GRID ─── */
+.stories-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;background:#111;
+}
+.stories-row .img-click{border:none}
+.st-badge{
+  position:absolute;top:10px;left:10px;
+  font-size:7px;font-weight:800;letter-spacing:1px;
+  background:var(--orange);color:#0D0D0D;padding:2px 6px;z-index:2;
+}
 
-/* STORIES GRID */
-.stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#111}
-.stories-grid img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
+/* ─── META ADS ─── */
+.meta-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2px;background:#111;
+  border-top:1px solid var(--border);
+}
+.meta-grid .img-click{border:none}
+.meta-badge{
+  position:absolute;top:10px;right:10px;
+  font-size:7px;font-weight:800;letter-spacing:1px;
+  background:var(--orange);color:#0D0D0D;padding:2px 6px;z-index:2;
+}
 
-/* FOOTER */
-.ft{background:#0D0D0D;border-top:1px solid var(--border);padding:60px 28px 48px}
-.ft svg{width:90px;margin-bottom:16px;display:block}
-.ft-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
-.ft-sub{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:48px}
-.ft-mote{font-size:clamp(36px,11vw,80px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:0.88;-webkit-text-stroke:1.5px rgba(232,78,15,0.2);color:transparent}
+/* ─── EMAIL MOCK ─── */
+.email-wrap{
+  border-top:1px solid var(--border);
+  background:#E8E4DC;
+  padding:32px 20px;
+  display:flex;justify-content:center;
+}
+.email-wrap .img-click{
+  max-width:460px;width:100%;
+  box-shadow:0 8px 48px rgba(0,0,0,0.4);
+  border:none;
+}
+.email-wrap .img-click img{width:100%;display:block}
+
+/* ─── FOOTER ─── */
+.ft{
+  background:#0D0D0D;
+  border-top:1px solid var(--border);
+  padding:52px 20px 48px;
+}
+.ft-logo svg{width:86px;height:auto;display:block;margin-bottom:14px}
+.ft-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.ft-sub{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:40px}
+.ft-mote{
+  font-size:clamp(40px,12vw,80px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-2px;line-height:0.88;
+  -webkit-text-stroke:1.5px rgba(240,236,228,0.1);
+  color:transparent;
+}
 .ft-mote span{-webkit-text-stroke:1.5px var(--orange)}
-.ft-copy{margin-top:24px;font-size:10px;color:rgba(240,236,228,0.18);letter-spacing:1px}
+.ft-copy{margin-top:20px;font-size:9px;color:rgba(240,236,228,0.15);letter-spacing:1px}
 
-/* DESKTOP */
-@media(min-width:768px){
-  .hd{padding:18px 48px}
-  .hd svg{width:120px}
-  .hero-body{padding:0 48px 88px}
-  .hero-stats{right:48px;bottom:88px}
-  .sec{padding:80px 48px 40px}
-  .pb{padding:18px 48px}
-  .frame-inner{padding:40px 48px}
-  .grid-3{grid-template-columns:repeat(3,1fr)}
-  .grid-2{grid-template-columns:repeat(2,1fr)}
-  .carrossel-item{flex:0 0 320px}
-  .carrossel-item img{width:320px;height:427px}
+/* ─── DESKTOP ─── */
+@media(min-width:640px){
+  .hd{padding:16px 40px}
+  .hd-logo svg{width:110px}
+  .hero-body{padding:0 40px 72px}
+  .sec{padding:64px 40px 36px}
+  .pb{padding:16px 40px}
+  .carr-wrap{padding:24px 0 24px 40px}
+  .carr-item{flex:0 0 280px;max-width:280px}
   .mobile-grid{grid-template-columns:repeat(3,1fr)}
   .meta-grid{grid-template-columns:repeat(3,1fr)}
-  .email-mock img{max-width:600px}
-  .ft{padding:80px 48px 56px}
+  .feed-stories{grid-template-columns:1fr 1fr}
+  .email-wrap{padding:40px}
+  .ft{padding:72px 40px 56px}
+}
+@media(min-width:960px){
+  .hd{padding:18px 56px}
+  .hd-logo svg{width:120px}
+  .hero-body{padding:0 56px 88px;max-width:680px}
+  .sec{padding:80px 56px 40px}
+  .pb{padding:18px 56px}
+  .carr-wrap{padding:32px 0 32px 56px}
+  .carr-item{flex:0 0 320px;max-width:320px}
+  .email-wrap .img-click{max-width:600px}
+  .ft{padding:80px 56px 64px}
 }
 </style>
 </head>
 <body>
 
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lb" onclick="if(event.target===this)closeLb()">
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img id="lb-img" src="" alt="">
+  <div class="lb-nav">
+    <button onclick="lbNav(-1)">← Anterior</button>
+    <button onclick="lbNav(1)">Próxima →</button>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header class="hd">
-  <div><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
+  <div class="hd-logo"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
   <div class="hd-right">
-    <span class="hd-count">16 PEÇAS</span>
-    <span class="hd-tag">Core04 · Campanha</span>
+    <span class="hd-pill">16 PEÇAS</span>
+    <span class="hd-tag">Core04</span>
   </div>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-bg" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="">
+  <img class="hero-img" src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="Freeway Core04">
   <div class="hero-grad"></div>
   <div class="hero-body">
-    <div class="hero-eyebrow">Freeway Core04 — Couro Taupe</div>
+    <div class="hero-ey">Freeway Core04 — Couro Taupe</div>
     <h1 class="hero-h1">
       CLÁSSICO<br>
-      <span class="t-out">NÃO</span><br>
-      <span class="t-or">ENVELHECE.</span>
+      <span class="out">NÃO</span><br>
+      <span class="or">ENVELHECE.</span>
     </h1>
-    <p class="hero-sub">Moc-toe costurado à mão · Sola em crepe natural · Couro nobuck<br>Estilo que não data.</p>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-n">16</div><div class="stat-l">Peças produzidas</div></div>
-    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Formatos</div></div>
+    <p class="hero-desc">Moc-toe costurado à mão · Sola em crepe natural · Couro nobuck · Estilo que não data.</p>
+    <div class="hero-badges">
+      <span class="badge">16 peças</span>
+      <span class="badge">6 formatos</span>
+      <span class="badge">1 mote</span>
+    </div>
   </div>
 </section>
 
-<!-- BANNERS -->
+<!-- BANNER DESKTOP -->
 <div class="sec">
-  <div class="sec-label">01 — Banners de Site</div>
+  <div class="sec-label">01 — Site</div>
   <h2 class="sec-title">BANNER <span class="out">DESKTOP</span></h2>
-  <p class="sec-sub">1920×900px — Banner principal do site</p>
+  <p class="sec-sub">1920×900px</p>
 </div>
-<div class="banner-desktop-wrap">
-  <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="Banner Desktop">
+<div class="banner-desk">
+  <div class="img-click" onclick="openLb(this)" data-group="banners" data-idx="0">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png" alt="Banner Desktop" loading="lazy">
+  </div>
 </div>
 
+<!-- BANNERS MOBILE -->
 <div class="sec">
-  <div class="sec-label">02 — Banners Mobile</div>
-  <h2 class="sec-title">3 <span class="out">VERSÕES</span></h2>
-  <p class="sec-sub">960×1400px — Três variações para teste A/B</p>
+  <div class="sec-label">02 — Site</div>
+  <h2 class="sec-title">BANNER <span class="out">MOBILE</span></h2>
+  <p class="sec-sub">960×1400px — 3 versões para teste A/B</p>
 </div>
-<div class="mobile-grid" style="border-top:1px solid var(--border)">
-  <div style="position:relative">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v1.png" alt="Mobile v1" style="width:100%;display:block">
-    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V1</div>
+<div class="mobile-grid">
+  <div class="img-click" onclick="openLb(this)" data-group="mobile" data-idx="0" style="position:relative">
+    <span class="ver-badge">V1</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v1.png" alt="Mobile v1" loading="lazy">
   </div>
-  <div style="position:relative">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v2.png" alt="Mobile v2" style="width:100%;display:block">
-    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V2</div>
+  <div class="img-click" onclick="openLb(this)" data-group="mobile" data-idx="1" style="position:relative">
+    <span class="ver-badge">V2</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v2.png" alt="Mobile v2" loading="lazy">
   </div>
-  <div style="position:relative">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v3.png" alt="Mobile v3" style="width:100%;display:block">
-    <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">V3</div>
+  <div class="img-click" onclick="openLb(this)" data-group="mobile" data-idx="2" style="position:relative">
+    <span class="ver-badge">V3</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v3.png" alt="Mobile v3" loading="lazy">
   </div>
 </div>
 
 <!-- CARROSSEL -->
 <div class="sec">
-  <div class="sec-label">03 — Carrossel</div>
-  <h2 class="sec-title">5 <span class="out">SLIDES</span></h2>
-  <p class="sec-sub">1080×1350px — Arraste para ver todos os slides</p>
+  <div class="sec-label">03 — Instagram</div>
+  <h2 class="sec-title">CARROSSEL <span class="out">5 SLIDES</span></h2>
+  <p class="sec-sub">1080×1350px — Arraste para explorar</p>
 </div>
-<div style="border-top:1px solid var(--border);padding:28px;background:#0D0D0D">
-  <div class="carrossel-strip">
-    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_01.png" alt="Slide 1"><div class="carrossel-item-num">01</div></div>
-    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_02.png" alt="Slide 2"><div class="carrossel-item-num">02</div></div>
-    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_03.png" alt="Slide 3"><div class="carrossel-item-num">03</div></div>
-    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_04.png" alt="Slide 4"><div class="carrossel-item-num">04</div></div>
-    <div class="carrossel-item"><img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_05.png" alt="Slide 5"><div class="carrossel-item-num">05</div></div>
+<div class="carr-wrap">
+  <div class="carr-hint">Arraste para ver todos</div>
+  <div class="carr-strip" id="carr">
+    <div class="carr-item">
+      <div class="img-click" onclick="openLb(this)" data-group="carrossel" data-idx="0" style="position:relative">
+        <span class="carr-num">01</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_01.png" alt="Slide 1" loading="lazy">
+      </div>
+    </div>
+    <div class="carr-item">
+      <div class="img-click" onclick="openLb(this)" data-group="carrossel" data-idx="1" style="position:relative">
+        <span class="carr-num">02</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_02.png" alt="Slide 2" loading="lazy">
+      </div>
+    </div>
+    <div class="carr-item">
+      <div class="img-click" onclick="openLb(this)" data-group="carrossel" data-idx="2" style="position:relative">
+        <span class="carr-num">03</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_03.png" alt="Slide 3" loading="lazy">
+      </div>
+    </div>
+    <div class="carr-item">
+      <div class="img-click" onclick="openLb(this)" data-group="carrossel" data-idx="3" style="position:relative">
+        <span class="carr-num">04</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_04.png" alt="Slide 4" loading="lazy">
+      </div>
+    </div>
+    <div class="carr-item">
+      <div class="img-click" onclick="openLb(this)" data-group="carrossel" data-idx="4" style="position:relative">
+        <span class="carr-num">05</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_05.png" alt="Slide 5" loading="lazy">
+      </div>
+    </div>
+  </div>
+  <div class="carr-dots" id="carr-dots">
+    <div class="carr-dot active"></div>
+    <div class="carr-dot"></div>
+    <div class="carr-dot"></div>
+    <div class="carr-dot"></div>
+    <div class="carr-dot"></div>
   </div>
 </div>
 
 <!-- FEED -->
 <div class="sec">
-  <div class="sec-label">04 — Feed & Stories</div>
-  <h2 class="sec-title">POST <span class="out">ÚNICO</span></h2>
-  <p class="sec-sub">1080×1350px — Post de feed</p>
+  <div class="sec-label">04 — Instagram</div>
+  <h2 class="sec-title">FEED <span class="out">& STORIES</span></h2>
+  <p class="sec-sub">Post único + Stories em 2 versões</p>
 </div>
-<div class="grid-2" style="border-top:1px solid var(--border)">
-  <div class="frame">
-    <div class="frame-inner" style="padding-bottom:0">
-      <div class="frame-label">Feed</div>
-      <div class="frame-format">1080×1350px</div>
+<div class="feed-stories">
+  <div>
+    <div class="fs-label">Feed · 1080×1350</div>
+    <div class="img-click" onclick="openLb(this)" data-group="feed" data-idx="0">
+      <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/feed.png" alt="Feed" loading="lazy">
     </div>
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/feed.png" alt="Feed" class="frame-img">
   </div>
   <div>
-    <div class="sec" style="padding-bottom:24px;border-top:none">
-      <div class="sec-label">Stories</div>
-      <h2 class="sec-title">2 <span class="out">VERSÕES</span></h2>
-      <p class="sec-sub">1080×1920px</p>
-    </div>
-    <div class="stories-grid" style="border-top:1px solid var(--border)">
-      <div style="position:relative">
-        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png" alt="Stories" style="width:100%;display:block">
-        <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">Original</div>
+    <div class="fs-label">Stories · 1080×1920</div>
+    <div class="stories-row">
+      <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="0" style="position:relative">
+        <span class="st-badge">Orig.</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png" alt="Stories" loading="lazy" style="width:100%;display:block">
       </div>
-      <div style="position:relative">
-        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png" alt="Stories Adaptado" style="width:100%;display:block">
-        <div style="position:absolute;top:12px;left:12px;font-size:8px;font-weight:700;letter-spacing:2px;color:#0D0D0D;background:var(--orange);padding:3px 7px">Adaptado</div>
+      <div class="img-click" onclick="openLb(this)" data-group="stories" data-idx="1" style="position:relative">
+        <span class="st-badge">Adapt.</span>
+        <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png" alt="Stories Adaptado" loading="lazy" style="width:100%;display:block">
       </div>
     </div>
   </div>
@@ -231,41 +492,99 @@ html,body{background:#0D0D0D;color:#F0ECE4;font-family:'League Spartan',sans-ser
 <div class="sec">
   <div class="sec-label">05 — Meta Ads</div>
   <h2 class="sec-title">3 <span class="out">ANÚNCIOS</span></h2>
-  <p class="sec-sub">Objetivo: Tráfego · Imagem única · Variações A/B/C</p>
+  <p class="sec-sub">Objetivo tráfego · Variações A/B/C para teste</p>
 </div>
-<div class="meta-grid" style="border-top:1px solid var(--border)">
-  <div class="meta-item">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_1.png" alt="Meta 1">
-    <div class="meta-badge">Anúncio A</div>
+<div class="meta-grid">
+  <div class="img-click" onclick="openLb(this)" data-group="meta" data-idx="0" style="position:relative">
+    <span class="meta-badge">Anúncio A</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_1.png" alt="Meta 1" loading="lazy">
   </div>
-  <div class="meta-item">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_2.png" alt="Meta 2">
-    <div class="meta-badge">Anúncio B</div>
+  <div class="img-click" onclick="openLb(this)" data-group="meta" data-idx="1" style="position:relative">
+    <span class="meta-badge">Anúncio B</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_2.png" alt="Meta 2" loading="lazy">
   </div>
-  <div class="meta-item">
-    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_3.png" alt="Meta 3">
-    <div class="meta-badge">Anúncio C</div>
+  <div class="img-click" onclick="openLb(this)" data-group="meta" data-idx="2" style="position:relative">
+    <span class="meta-badge">Anúncio C</span>
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_3.png" alt="Meta 3" loading="lazy">
   </div>
 </div>
 
 <!-- EMAIL -->
 <div class="sec">
-  <div class="sec-label">06 — E-mail Marketing</div>
-  <h2 class="sec-title">EMAIL <span class="out">MKT</span></h2>
-  <p class="sec-sub">600×1920px — Template completo para CRM</p>
+  <div class="sec-label">06 — CRM</div>
+  <h2 class="sec-title">E-MAIL <span class="out">MARKETING</span></h2>
+  <p class="sec-sub">600×1920px — Template para E-drone</p>
 </div>
-<div class="email-mock" style="border-top:1px solid var(--border)">
-  <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing">
+<div class="email-wrap">
+  <div class="img-click" onclick="openLb(this)" data-group="email" data-idx="0">
+    <img src="https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png" alt="E-mail Marketing" loading="lazy">
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer class="ft">
-  <div><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
+  <div class="ft-logo"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 279.37 43.15"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Camada_1-2"><g><g><path class="cls-1" d="M106.06.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M142.6.09h-28.42c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h28.42c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-17.28c-.58,0-1.05-.47-1.05-1.05v-6.67c0-.58.47-1.05,1.05-1.05h15c.58,0,1.05-.47,1.05-1.05v-6.59c0-.58-.47-1.05-1.05-1.05h-15c-.58,0-1.05-.47-1.05-1.05v-6.18c0-.58.47-1.05,1.05-1.05h17.28c.58,0,1.05-.47,1.05-1.05V1.14c0-.58-.47-1.05-1.05-1.05Z"/><path class="cls-1" d="M29.62.09H.89C.4.09,0,.49,0,.98v41.28c0,.49.4.89.89.89h9.35c.49,0,.89-.4.89-.89v-15.68c0-.49.4-.89.89-.89h12.66c.49,0,.89-.4.89-.89v-6.9c0-.49-.4-.89-.89-.89h-12.66c-.49,0-.89-.4-.89-.89v-6.46c0-.49.4-.89.89-.89h17.59c.49,0,.89-.4.89-.89V.98c0-.49-.4-.89-.89-.89Z"/><path class="cls-1" d="M232.52,0h-15.38c-.93,0-1.74.61-2.01,1.5l-12.24,41.65h10.03c.93,0,1.74-.61,2.01-1.5l2.11-7.18h15.53l2.11,7.18c.26.89,1.08,1.5,2.01,1.5h10.07L234.53,1.5c-.26-.89-1.08-1.5-2.01-1.5ZM219.6,25.69l5.22-17.76,5.22,17.76h-10.43Z"/><path class="cls-1" d="M62.04,21.36h-.28c4.99-.92,8.77-5.28,8.77-10.54C70.54,4.89,65.74.09,59.82.09h-22.2c-.58,0-1.05.47-1.05,1.05v40.97c0,.58.47,1.05,1.05,1.05h10.09v-16.29h5.15c2.49,0,4.63,1.81,5.09,4.32l1.52,8.15c.41,2.21,2.3,3.81,4.49,3.81h7.35l-3.09-16.55c-.57-3.05-3.17-5.25-6.19-5.25ZM54.22,18.13h-6.51v-9.36h6.51c2.67,0,4.83,2.1,4.83,4.68s-2.16,4.68-4.83,4.68Z"/><path class="cls-1" d="M202.72.09h-9.02c-.51,0-.95.37-1.03.88l-4.88,30.54-6.35-30.7C181.33.34,180.9,0,180.41,0h-8.02c-.49,0-.91.34-1.02.82l-6.23,30.11-4.79-29.96c-.08-.51-.52-.88-1.03-.88h-9.02c-.64,0-1.13.58-1.03,1.21l6.69,41.85h13.78c.94,0,1.77-.63,2.02-1.54l4.29-23.62c.07-.4.65-.4.72,0l4.29,23.62c.25.91,1.07,1.54,2.02,1.54h13.99l6.69-41.85c.1-.64-.39-1.21-1.03-1.21Z"/><path class="cls-1" d="M278.47,0h-10.3c-.34,0-.65.19-.8.5l-7.45,15.03-7.45-15.03c-.15-.3-.46-.5-.8-.5h-10.3c-.68,0-1.11.73-.78,1.33l13.78,27.87v13.07c0,.49.4.89.89.89h9.3c.49,0,.89-.4.89-.89v-13.07l13.78-27.87c.33-.6-.1-1.33-.78-1.33Z"/></g></g></g></svg></div>
   <div class="ft-tag">Campanha Core04 · Couro Taupe</div>
   <div class="ft-sub">Freeway Boots & Shoes · lojafreeway.com.br<br>16 peças · 6 formatos · 1 mote</div>
   <div class="ft-mote">CLÁSSICO<br>NÃO<br><span>ENVELHECE.</span></div>
   <div class="ft-copy">© Freeway Calçados · Desde 1989</div>
 </footer>
 
+<script>
+// ─── GRUPOS DE IMAGENS ───
+const groups = {
+  banners: ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_desktop.png'],
+  mobile:  ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v1.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v2.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/banner_mobile_v3.png'],
+  carrossel:['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_01.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_02.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_03.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_04.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/carrossel_05.png'],
+  feed:    ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/feed.png'],
+  stories: ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/stories_adaptado.png'],
+  meta:    ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_1.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_2.png','https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/meta_ads_3.png'],
+  email:   ['https://raw.githubusercontent.com/murilosecco/freeway-core04/main/assets/email_mkt.png'],
+};
+
+let curGroup = '', curIdx = 0;
+
+function openLb(el) {
+  curGroup = el.dataset.group;
+  curIdx   = parseInt(el.dataset.idx);
+  showLb();
+}
+
+function showLb() {
+  const imgs = groups[curGroup];
+  document.getElementById('lb-img').src = imgs[curIdx];
+  document.getElementById('lb-counter').textContent = (curIdx+1) + ' / ' + imgs.length;
+  document.getElementById('lb').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLb() {
+  document.getElementById('lb').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lbNav(dir) {
+  const imgs = groups[curGroup];
+  curIdx = (curIdx + dir + imgs.length) % imgs.length;
+  showLb();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+});
+
+// ─── CARROSSEL DOTS ───
+const carr = document.getElementById('carr');
+const dots = document.querySelectorAll('.carr-dot');
+if (carr) {
+  carr.addEventListener('scroll', () => {
+    const w = carr.scrollWidth - carr.clientWidth;
+    const idx = Math.round((carr.scrollLeft / w) * (dots.length - 1));
+    dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+  });
+}
+</script>
 </body>
 </html>
